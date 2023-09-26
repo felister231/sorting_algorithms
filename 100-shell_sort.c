@@ -15,14 +15,14 @@ void int_swapping(int *a, int *b)
 }
 
 /**
- * shell_sort - Sort an array of integers in ascending
+ * shell_sorting - Sort an array of integers in ascending
  *              order using the shell sort algorithm.
  * @array: An array of integers.
  * @size: The size of the array.
  *
  * Description: Uses the Knuth interval sequence.
  */
-void shell_sort(int *array, size_t size)
+void shell_sorting(int *array, size_t size)
 {
 	size_t gap, i, j;
 

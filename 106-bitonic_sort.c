@@ -1,7 +1,7 @@
 #include "sort.h"
 
 void int_swapping(int *a, int *b);
-void bitonic_merge(int *array, size_t size, size_t start, size_t seq,
+void merge_batonic(int *array, size_t size, size_t start, size_t seq,
 		char flow);
 void bitonic_seq(int *array, size_t size, size_t start, size_t seq, char flow);
 void bitonic_sort(int *array, size_t size);
@@ -21,14 +21,14 @@ void int_swapping(int *a, int *b)
 }
 
 /**
- * bitonic_merge - Sort a bitonic sequence inside an array of integers.
+ * merge_batonic - Sort a bitonic sequence inside an array of integers.
  * @array: An array of integers.
  * @size: The size of the array.
  * @start: The starting index of the sequence in array to sort.
  * @seq: The size of the sequence to sort.
  * @flow: The direction to sort in.
  */
-void bitonic_merge(int *array, size_t size, size_t start, size_t seq,
+void merge_batonic(int *array, size_t size, size_t start, size_t seq,
 		char flow)
 {
 	size_t i, jump = seq / 2;
@@ -41,8 +41,8 @@ void bitonic_merge(int *array, size_t size, size_t start, size_t seq,
 			    (flow == DOWN && array[i] < array[i + jump]))
 				int_swapping(array + i, array + i + jump);
 		}
-		bitonic_merge(array, size, start, jump, flow);
-		bitonic_merge(array, size, start + jump, jump, flow);
+		merge_batonic(array, size, start, jump, flow);
+		merge_batonic(array, size, start + jump, jump, flow);
 	}
 }
 
@@ -66,7 +66,7 @@ void bitonic_seq(int *array, size_t size, size_t start, size_t seq, char flow)
 
 		bitonic_seq(array, size, start, cut, UP);
 		bitonic_seq(array, size, start + cut, cut, DOWN);
-		bitonic_merge(array, size, start, seq, flow);
+		merge_batonic(array, size, start, seq, flow);
 
 		printf("Result [%lu/%lu] (%s):\n", seq, size, str);
 		print_array(array + start, seq);
